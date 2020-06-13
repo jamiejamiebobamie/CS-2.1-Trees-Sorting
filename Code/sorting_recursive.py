@@ -1,15 +1,32 @@
 #!python
 
-
-def merge(items1, items2):
+def merge(items1, items2, items):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
-
+    TODO: Running time: O(n)
+    TODO: Memory usage: O(n)"""
+    i = 0
+    j = 0
+    while i < len(items1) and j < len(items2):
+        if items1[i] < items2[j]:
+            items[i+j] = items1[i]
+            i+=1
+        elif items1[i] > items2[j]:
+            items[i+j] = items2[j]
+            j+=1
+        else:
+            items[i+j] = items1[i]
+            i+=1
+            items[i+j] = items2[j]
+            j+=1
+  # add the remaining elements from either arr1 or arr2
+    while i < len(items1):
+        items[i+j] = items1[i]
+        i+=1
+    while j < len(items2):
+        items[i+j] = items2[j]
+        j+=1
+    return items
 
 def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
@@ -31,6 +48,14 @@ def merge_sort(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
+    if len(items) == 1:
+        return
+    mid = len(items)//2
+    items1 = items[:mid]
+    items2 = items[mid:]
+    merge_sort(items1)
+    merge_sort(items2)
+    return merge(items1,items2,items)
 
 
 def partition(items, low, high):
@@ -57,3 +82,6 @@ def quick_sort(items, low=None, high=None):
     # TODO: Check if list or range is so small it's already sorted (base case)
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
+
+arr = [-1,5,4,3,1,8,9,10]
+print(merge_sort(arr))

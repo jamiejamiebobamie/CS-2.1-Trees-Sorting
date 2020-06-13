@@ -1,6 +1,5 @@
 #!python
 
-
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
     Running time: O(n)
@@ -54,7 +53,6 @@ def insertion_sort(items):
         j = i
         while(j > 0 and currentUnsortedItem < items[j - 1]):
             items[j] = items[j - 1]
-            print(items)
             j-=1
         items[j] = currentUnsortedItem
     return items
